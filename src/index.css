@@ -11,8 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 .map-container {
-  height: 1000px;
-  width: 1000px;
+  height: 400px;
   justify-content: center;
   }

@@ -12,5 +12,7 @@ code {
     monospace;
 }
 .map-container {
-  height: 400px;
+  height: 1000px;
+  width: 1000px;
+  justify-content: center;
   }

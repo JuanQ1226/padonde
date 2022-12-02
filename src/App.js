@@ -24,9 +24,9 @@ export default class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-    lng: -70.9,
-    lat: 42.35,
-    zoom: 9
+    lng: -66.350,
+    lat: 18.2208,
+    zoom: 8
     };
     this.mapContainer = React.createRef();
   }

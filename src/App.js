@@ -9,6 +9,8 @@ import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import logo from './images/logo.png'
+
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBook, faC, faCamera, faCoffee, faGasPump, faHospital, faMartiniGlassCitrus, faPeopleGroup, faStore, faTree, faUmbrellaBeach, faUtensils } from '@fortawesome/free-solid-svg-icons'
@@ -16,16 +18,16 @@ import { faBook, faC, faCamera, faCoffee, faGasPump, faHospital, faMartiniGlassC
 mapboxgl.accessToken = "pk.eyJ1IjoianVhbnExMjI2IiwiYSI6ImNsYjZxY2tnbzAzangzcG9keTA5OHluZGoifQ.gvrUPVXU_yyQnEDDy274ww";
 
 const FACoffee = <FontAwesomeIcon icon={faCoffee} />
-const FAUtensils = <FontAwesomeIcon icon={faUtensils}/>
-const FAUmbrellaBeach = <FontAwesomeIcon icon={faUmbrellaBeach}/>
-const FATree = <FontAwesomeIcon icon={faTree}/>
-const FABook = <FontAwesomeIcon icon={faBook}/>
-const FAHospital = <FontAwesomeIcon icon ={faHospital}/>
-const FAPeopleGroup = <FontAwesomeIcon icon ={faPeopleGroup}/>
-const FAStore = <FontAwesomeIcon icon = {faStore}/>
-const FACamera = <FontAwesomeIcon icon={faCamera}/>
-const FAMartiniGlassCitrus = <FontAwesomeIcon icon = {faMartiniGlassCitrus}/>
-const FAGasPump = <FontAwesomeIcon icon = {faGasPump}/>
+const FAUtensils = <FontAwesomeIcon icon={faUtensils} />
+const FAUmbrellaBeach = <FontAwesomeIcon icon={faUmbrellaBeach} />
+const FATree = <FontAwesomeIcon icon={faTree} />
+const FABook = <FontAwesomeIcon icon={faBook} />
+const FAHospital = <FontAwesomeIcon icon={faHospital} />
+const FAPeopleGroup = <FontAwesomeIcon icon={faPeopleGroup} />
+const FAStore = <FontAwesomeIcon icon={faStore} />
+const FACamera = <FontAwesomeIcon icon={faCamera} />
+const FAMartiniGlassCitrus = <FontAwesomeIcon icon={faMartiniGlassCitrus} />
+const FAGasPump = <FontAwesomeIcon icon={faGasPump} />
 //Map creation
 
 
@@ -39,6 +41,7 @@ export default class App extends React.PureComponent {
     };
     this.mapContainer = React.createRef();
   }
+
   componentDidMount() {
     const { lng, lat, zoom } = this.state;
     const map = new mapboxgl.Map({
@@ -76,7 +79,7 @@ export default class App extends React.PureComponent {
     return (
       <div className='App'>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">¿Pa' Donde?</a>
+          <a class="navbar-brand" href="#"><img src={logo} alt="logo" height={100} /></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -95,11 +98,14 @@ export default class App extends React.PureComponent {
           </div>
         </nav>
         <div class="container">
-          <div ref={this.mapContainer} className="map-container">
+          <div
+            ref={this.mapContainer} className="map-container">
           </div>
+
+          <ul class="nav nav-tabs"></ul>
           <div class="card mt-3">
             <div class="card-body">
-              <form>
+              <form id="form-places" onSubmit={handleOnsubmit}>
                 <div class="row">
                   <div class="col-lg-8 col-sm-12">
                     <div class="form-check form-check-inline form-group">
@@ -146,14 +152,16 @@ export default class App extends React.PureComponent {
                       <input class="form-check-input" type="checkbox" id="inlineCheckboxGas" value="option11" />
                       <label class="form-check-label" for="inlineCheckbox2">{FAGasPump}</label>
                     </div>
-
                   </div>
                   <div class="col-lg-4 col-sm-12">
-                    <label for="formControlRange">Radius</label>
+                    <label for="formControlRange">Alrededor de</label>
                     <div class="form-group">
                       <input type="range" class="form-control-range" id="formControlRange" />
                     </div>
                   </div>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary mb-2">Buscar</button>
                 </div>
               </form>
             </div>
@@ -162,4 +170,10 @@ export default class App extends React.PureComponent {
       </div>
     );
   }
+}
+
+function handleOnsubmit(event) {
+
+  event.preventDefault();
+  // Do Whatever you want
 }

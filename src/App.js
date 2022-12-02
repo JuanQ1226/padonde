@@ -5,19 +5,25 @@ import React from 'react';
 import "./directions.css"
 import "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css"
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
-
-
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import airtableJson from 'airtable-json';
 
 mapboxgl.accessToken = "pk.eyJ1IjoianVhbnExMjI2IiwiYSI6ImNsYjZxY2tnbzAzangzcG9keTA5OHluZGoifQ.gvrUPVXU_yyQnEDDy274ww";
-
+const auth_key = "keymRUApDEF4BUcI9";
+const base_name = "app9C1Og0GfjFYSpo";
 const element = <FontAwesomeIcon icon={faCoffee} />
 
-//Map creation
+var data = airtableJson({
+  auth_key,
+  base_name,
+  primary:"Table 1",
+  view:"Grid view"
+})
+console.log(data)
+
 
 
 export default class App extends React.PureComponent {
@@ -62,6 +68,21 @@ export default class App extends React.PureComponent {
         showCompass:true,
         showZoom:true
       }))
+      data.then(value=> {value.forEach(location => {
+        var marker = new mapboxgl.Marker()
+         .setLngLat([location.lat,location.lng])
+          .setPopup(new mapboxgl.Popup({ offset: 30 })
+          .setHTML('<h4>' + location.Description + '</h4>'))
+          .addTo(map);
+       });})
+			//console.log(location);
+		 	//var marker = new mapboxgl.Marker()
+       //.setLngLat([location.lng,location.lat])
+		// 		.setPopup(new mapboxgl.Popup({ offset: 30 })
+		// 		.setHTML('<h4>' + location.Description + '</h4>'))
+		// 		.addTo(map);
+
+
   }
   render() {
     return (

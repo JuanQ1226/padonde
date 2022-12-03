@@ -46,20 +46,7 @@ export default class App extends React.PureComponent {
       center: [lng, lat],
       zoom: zoom
     });
-    map.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true
-        },
-        fitBoundsOptions: {
-          maxZoom: 8
-        },
-        // When active the map will receive updates to the device's location as it changes.
-        trackUserLocation: true,
-        // Draw an arrow next to the location dot to indicate which direction the device is heading.
-        showUserHeading: true
-      })
-    );
+    
     const directions = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
       unit: 'metric',
@@ -71,6 +58,20 @@ export default class App extends React.PureComponent {
     map.on('load', () => {
       button.addEventListener('click', function() {
         console.log("click");
+        map.addControl(
+          new mapboxgl.GeolocateControl({
+            positionOptions: {
+              enableHighAccuracy: true
+            },
+            fitBoundsOptions: {
+              maxZoom: 8
+            },
+            // When active the map will receive updates to the device's location as it changes.
+            trackUserLocation: true,
+            // Draw an arrow next to the location dot to indicate which direction the device is heading.
+            showUserHeading: true
+          })
+        );
         navigator.geolocation.getCurrentPosition(function(position) { 
             directions.setOrigin([position.coords.longitude,position.coords.latitude]); // can be address in form setOrigin("12, Elm Street, NY"
             console.log("Latitude is :", position.coords.latitude);

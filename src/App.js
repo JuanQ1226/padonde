@@ -7,9 +7,9 @@ import "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css"
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './images/logo.png'
-import ReactDOM from 'react-dom'
 import airtableJson from 'airtable-json';
 import SearchForm from './components/SearchForm';
+import Navbar from './components/Navbar'
 
 
 mapboxgl.accessToken = "pk.eyJ1IjoianVhbnExMjI2IiwiYSI6ImNsYjZxY2tnbzAzangzcG9keTA5OHluZGoifQ.gvrUPVXU_yyQnEDDy274ww";
@@ -94,25 +94,7 @@ export default class App extends React.PureComponent {
   render() {
     return (
       <div className='App'>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#"><img src={logo} alt="logo" height={100} /></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Planner</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <Navbar></Navbar>
         <div class="container">
           <div
             ref={this.mapContainer} className="map-container">

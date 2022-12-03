@@ -23,7 +23,7 @@ var data = airtableJson({
 })
 console.log(data)
 
-
+export var selectedTypes = new Array();
 
 export default class App extends React.PureComponent {
   
@@ -32,7 +32,8 @@ export default class App extends React.PureComponent {
     this.state = {
     lng: -66.350,
     lat: 18.2208,
-    zoom: 8
+    zoom: 8,
+    selectedTypes : []
     };
     this.mapContainer = React.createRef();
   }
@@ -71,12 +72,15 @@ export default class App extends React.PureComponent {
       showZoom: true
     }))
       data.then(value=> {value.forEach(location => {
+        if (this.state.selectedTypes.includes(location.type) || this.state.selectedTypes.length == 0) {
         var marker = new mapboxgl.Marker()
          .setLngLat([location.lat,location.lng])
           .setPopup(new mapboxgl.Popup({ offset: 30 })
-          .setHTML('<h4>' + location.Description + '</h4>'))
-          .addTo(map);
-       });})
+          .setHTML( '<b>' + location.Name + '</b>' +'<p>' + location.Description + '</p>'))
+          .addTo(map);}
+       })
+       selectedTypes = [];
+       ;})
     
     
     

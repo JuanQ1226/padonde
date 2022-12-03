@@ -8,12 +8,14 @@ import Row from 'react-bootstrap/Row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBook, faCoffee, faCamera, faGasPump, faHospital, faMartiniGlassCitrus, faPeopleGroup, faStore, faTree, faUmbrellaBeach, faUtensils } from '@fortawesome/free-solid-svg-icons'
 import React from 'react';
+import App, {selectedTypes} from '../App';
 
 
 class SearchForm extends React.Component {
     constructor(props) {
         super(props);
         this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleOnSubmit = this.handleOnSubmit.bind(this)
         this.state={
             rangeValue: 15,
             food: false,
@@ -40,12 +42,49 @@ class SearchForm extends React.Component {
         });
       }
 
-
+      handleOnSubmit(event){
+        console.log('s')
+        event.preventDefault();
+        if (this.state.coffee && !selectedTypes.includes("coffee")) {
+            selectedTypes.push("coffee")
+        }
+        if (this.state.beach && !selectedTypes.includes("playa")) {
+            selectedTypes.push("playa")
+        }
+        if (this.state.drinks && !selectedTypes.includes("bebida")) {
+            selectedTypes.push("bebida")
+        }
+        if (this.state.food && !selectedTypes.includes("comida")) {
+            selectedTypes.push("comida")
+        }
+        if (this.state.nature && !selectedTypes.includes("bosque")) {
+            selectedTypes.push("bosque")
+        }
+        if (this.state.books && !selectedTypes.includes("bibliotecas")) {
+            selectedTypes.push("bibliotecas")
+        }
+        if (this.state.hospitals && !selectedTypes.includes("hospital")) {
+            selectedTypes.push("hospital")
+        }
+        if (this.state.activities && !selectedTypes.includes("actividades")) {
+            selectedTypes.push("actividades")
+        }
+        if (this.state.scenary && !selectedTypes.includes("fotos")) {
+            selectedTypes.push("fotos")
+        }
+        if (this.state.markets && !selectedTypes.includes("tiendas")) {
+            selectedTypes.push("tiendas")
+        }
+        if (this.state.gas && !selectedTypes.includes("gas")) {
+            selectedTypes.push("gas")
+        }
+        console.log(selectedTypes)
+    }
     render() {
         return (
             <Container>
                 <Card className="mt-2">
-                    <Form controlId="searchForm">
+                    <Form controlId="searchForm" onSubmit={this.handleOnSubmit}>
                         <Row className='align-items-center'>
                             <Col sm={12} lg={8}>
                                 <Form.Label inline>Categorias</Form.Label>

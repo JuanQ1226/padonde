@@ -55,6 +55,7 @@ export default class App extends React.PureComponent {
     var button = document.body.appendChild(document.createElement('button'));
     button.style = 'z-index:10;position:absolute;top:165px;right:12%'
     button.textContent = 'From my location';
+    button.className = "btn btn-success"
     map.on('load', () => {
       button.addEventListener('click', function() {
         console.log("click");
@@ -114,9 +115,11 @@ export default class App extends React.PureComponent {
           </div>
           <SearchForm></SearchForm>
         </div>
-        <div className='container c'>
+        <div className='container c text-center'>
           <h1 className="Title">Explore the Real Puerto Rico</h1>
-          <p></p>
+          <p>Enjoy this Curated list of places in Puerto Rico. Places that could be overseen by the big map app's algorithms and are not well known by turists.</p>
+          <h2 className='Title'>Promote Our Community</h2>
+          <button className="btn btn-success"onClick={()=>window.open("https://airtable.com/invite/l?inviteId=invbx1tkVLFZYVPkW&inviteToken=bc7e630062782503b5d043e6d15a69287ed6ce875eae250e444e905ea63c50b2&utm_medium=email&utm_source=product_team&utm_content=transactional-alerts")}>Grow The Community</button>
         </div>
       </div>
     );

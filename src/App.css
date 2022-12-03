@@ -14,7 +14,12 @@
 }
 .c {
 	margin-top: 4em;
-
+	align-text: center;
+	padding: 30px;
+	border-style: solid;
+	border-color: rgb(213, 212, 212);
+	border-radius: 20px;
+	border:4;
 }
 @keyframes gradient {
 	0% {

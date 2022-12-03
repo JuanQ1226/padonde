@@ -54,8 +54,7 @@ class SearchForm extends React.Component {
                 <Card className="mt-2" >
                     <Form controlId="searchForm">
                         <Row className='align-items-center'>
-                            <Col sm={12} lg={10}>
-                                <Form.Label inline>Categorias</Form.Label>
+                            <Col sm={12} lg={10} className='mb-1'>
                                 <Form.Group controlId='Categories'>
                                     <Form.Check inline checked={this.state.food} name="food" type="checkbox" id="checkUtensils"  onChange={this.handleInputChange} label={<FontAwesomeIcon icon={faUtensils} size="2x" />}></Form.Check>
                                     <Form.Check inline checked={this.state.coffee} name="coffee" type="checkbox" id="checkCoffee" onChange={this.handleInputChange} label={<FontAwesomeIcon icon={faCoffee} size="2x" />}></Form.Check>

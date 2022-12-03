@@ -117,6 +117,7 @@ export default class App extends React.PureComponent {
         </div>
         <div className='container c text-center'>
           <h1 className="Title">Explore the Real Puerto Rico</h1>
+          <img src={require('./images/explore.jpg')} height={300}/>
           <p>Enjoy this Curated list of places in Puerto Rico. Places that could be overseen by the big map app's algorithms and are not well known by turists.</p>
           <h2 className='Title'>Promote Our Community</h2>
           <button className="btn btn-success"onClick={()=>window.open("https://airtable.com/invite/l?inviteId=invbx1tkVLFZYVPkW&inviteToken=bc7e630062782503b5d043e6d15a69287ed6ce875eae250e444e905ea63c50b2&utm_medium=email&utm_source=product_team&utm_content=transactional-alerts")}>Grow The Community</button>

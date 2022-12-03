@@ -9,7 +9,7 @@ const Navbar = () => {
     return (
         <Container fluid>
             <Row>
-                <Col sm={12} className="justify-content-center">
+                <Col sm={12}>
                     <img src={require('../images/logo.png')} height={200}/>
                 </Col>
             </Row>

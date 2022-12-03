@@ -86,12 +86,6 @@ export default class App extends React.PureComponent {
           .setHTML('<h4>' + location.Description + '</h4>'))
           .addTo(map);
        });})
-			//console.log(location);
-		 	//var marker = new mapboxgl.Marker()
-       //.setLngLat([location.lng,location.lat])
-		// 		.setPopup(new mapboxgl.Popup({ offset: 30 })
-		// 		.setHTML('<h4>' + location.Description + '</h4>'))
-		// 		.addTo(map);
     
     
     

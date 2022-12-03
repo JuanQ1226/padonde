@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBook, faCoffee, faCamera, faGasPump, faHospital, faMartiniGlassCitrus, faPeopleGroup, faStore, faTree, faUmbrellaBeach, faUtensils } from '@fortawesome/free-solid-svg-icons'
 import airtableJson from 'airtable-json';
 
+
 mapboxgl.accessToken = "pk.eyJ1IjoianVhbnExMjI2IiwiYSI6ImNsYjZxY2tnbzAzangzcG9keTA5OHluZGoifQ.gvrUPVXU_yyQnEDDy274ww";
 const auth_key = "keymRUApDEF4BUcI9";
 const base_name = "app9C1Og0GfjFYSpo";
@@ -37,6 +38,7 @@ console.log(data)
 
 
 export default class App extends React.PureComponent {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -48,6 +50,15 @@ export default class App extends React.PureComponent {
   }
 
   componentDidMount() {
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(function(position) {
+      map.on('load',  function() {
+          directions.setOrigin([position.coords.longitude,position.coords.latitude]); // can be address in form setOrigin("12, Elm Street, NY")
+      })
+        console.log("Latitude is :", position.coords.latitude);
+        console.log("Longitude is :", position.coords.longitude);
+      });
+    };
     const { lng, lat, zoom } = this.state;
     const map = new mapboxgl.Map({
       container: this.mapContainer.current,
@@ -74,6 +85,7 @@ export default class App extends React.PureComponent {
       unit: 'metric',
       profile: 'mapbox/driving'
     })
+    
     map.addControl(directions, 'top-left');
     map.addControl(new mapboxgl.NavigationControl({
       showCompass: true,
@@ -92,7 +104,9 @@ export default class App extends React.PureComponent {
 		// 		.setPopup(new mapboxgl.Popup({ offset: 30 })
 		// 		.setHTML('<h4>' + location.Description + '</h4>'))
 		// 		.addTo(map);
-
+    
+    
+    
 
   }
   render() {

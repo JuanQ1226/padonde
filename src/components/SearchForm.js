@@ -36,7 +36,7 @@ class SearchForm extends React.Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-    
+        
         this.setState({
           [name]: value
         });
@@ -44,7 +44,7 @@ class SearchForm extends React.Component {
 
       handleOnSubmit(event){
         console.log('s')
-        event.preventDefault();
+        event.preventDefautl();
         if (this.state.coffee && !selectedTypes.includes("coffee")) {
             selectedTypes.push("coffee")
         }
@@ -83,7 +83,7 @@ class SearchForm extends React.Component {
     render() {
         return (
             <Container>
-                <Card className="mt-2">
+                <Card className="mt-2" >
                     <Form controlId="searchForm" onSubmit={this.handleOnSubmit}>
                         <Row className='align-items-center'>
                             <Col sm={12} lg={8}>

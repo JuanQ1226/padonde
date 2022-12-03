@@ -2,7 +2,6 @@
 import './App.css';
 import mapboxgl, { NavigationControl } from 'mapbox-gl'; //enlist-disable-line import/no-webpack-loader-syntax
 import React from 'react';
-import "./directions.css"
 import "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css"
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,6 +9,7 @@ import logo from './images/logo.png'
 import airtableJson from 'airtable-json';
 import SearchForm from './components/SearchForm';
 import Navbar from './components/Navbar'
+import { faLocationCrosshairs } from '@fortawesome/free-solid-svg-icons';
 
 
 mapboxgl.accessToken = "pk.eyJ1IjoianVhbnExMjI2IiwiYSI6ImNsYjZxY2tnbzAzangzcG9keTA5OHluZGoifQ.gvrUPVXU_yyQnEDDy274ww";
@@ -32,7 +32,7 @@ export default class App extends React.PureComponent {
     this.state = {
     lng: -66.350,
     lat: 18.2208,
-    zoom: 8,
+    zoom: 7.5,
     selectedTypes : []
     };
     this.mapContainer = React.createRef();
@@ -53,7 +53,7 @@ export default class App extends React.PureComponent {
       profile: 'mapbox/driving'
     })
     var button = document.body.appendChild(document.createElement('button'));
-    button.style = 'z-index:10;position:absolute;top:165px;right:100px;';
+    button.style = 'z-index:10;position:absolute;top:165px;right:12%'
     button.textContent = 'From my location';
     map.on('load', () => {
       button.addEventListener('click', function() {
@@ -84,14 +84,18 @@ export default class App extends React.PureComponent {
       showCompass: true,
       showZoom: true
     }))
-      data.then(value=> {value.forEach(location => {
-        if (this.state.selectedTypes.includes(location.type) || this.state.selectedTypes.length == 0) {
+      data.then(value=> {value.forEach(locations => {
+        let paramms = new URLSearchParams(window.location.search);
+        console.log(paramms);
+        if (paramms.get(locations.type) == "on") {
+          console.log(paramms.get(locations.type))
         var marker = new mapboxgl.Marker()
-         .setLngLat([location.lat,location.lng])
+         .setLngLat([locations.lat,locations.lng])
           .setPopup(new mapboxgl.Popup({ offset: 30 })
-          .setHTML( '<b>' + location.Name + '</b>' +'<p>' + location.Description + '</p>'))
+          .setHTML( '<b>' + locations.Name + '</b>' +'<p>' + locations.Description + '</p>'))
           .addTo(map);}
-       })
+       }
+       )
        selectedTypes = [];
        ;})
     
@@ -101,13 +105,18 @@ export default class App extends React.PureComponent {
   }
   render() {
     return (
+      
       <div className='App'>
         <Navbar></Navbar>
-        <div class="container">
+        <div className="container">
           <div
             ref={this.mapContainer} className="map-container">
           </div>
           <SearchForm></SearchForm>
+        </div>
+        <div className='container c'>
+          <h1 className="Title">Explore the Real Puerto Rico</h1>
+          <p></p>
         </div>
       </div>
     );

@@ -10,6 +10,7 @@ import logo from './images/logo.png'
 import airtableJson from 'airtable-json';
 import SearchForm from './components/SearchForm';
 import Navbar from './components/Navbar'
+import { useState } from 'react';
 
 
 mapboxgl.accessToken = "pk.eyJ1IjoianVhbnExMjI2IiwiYSI6ImNsYjZxY2tnbzAzangzcG9keTA5OHluZGoifQ.gvrUPVXU_yyQnEDDy274ww";
@@ -23,7 +24,7 @@ var data = airtableJson({
 })
 console.log(data)
 
-
+var selectedTypes = [];
 
 export default class App extends React.PureComponent {
   
@@ -71,7 +72,8 @@ export default class App extends React.PureComponent {
     const directions = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
       unit: 'metric',
-      profile: 'mapbox/driving'
+      profile: 'mapbox/driving',
+      language : 'es'
     })
     
     map.addControl(directions, 'top-left');
@@ -83,7 +85,7 @@ export default class App extends React.PureComponent {
         var marker = new mapboxgl.Marker()
          .setLngLat([location.lat,location.lng])
           .setPopup(new mapboxgl.Popup({ offset: 30 })
-          .setHTML('<h4>' + location.Description + '</h4>'))
+          .setHTML('<b>' + location.Name + '</b>' + '<p>' + location.Description + '</p>'))
           .addTo(map);
        });})
     

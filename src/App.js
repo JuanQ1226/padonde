@@ -50,15 +50,6 @@ export default class App extends React.PureComponent {
   }
 
   componentDidMount() {
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(function(position) {
-      map.on('load',  function() {
-          directions.setOrigin([position.coords.longitude,position.coords.latitude]); // can be address in form setOrigin("12, Elm Street, NY")
-      })
-        console.log("Latitude is :", position.coords.latitude);
-        console.log("Longitude is :", position.coords.longitude);
-      });
-    };
     const { lng, lat, zoom } = this.state;
     const map = new mapboxgl.Map({
       container: this.mapContainer.current,
@@ -207,7 +198,16 @@ export default class App extends React.PureComponent {
 }
 
 function handleOnsubmit(event) {
-
+  const directions = new MapboxDirections({
+    accessToken: mapboxgl.accessToken,
+    unit: 'metric',
+    profile: 'mapbox/driving'
+  });
   event.preventDefault();
-  // Do Whatever you want
+  console.log("hello");
+  navigator.geolocation.getCurrentPosition(function(position) { 
+    directions.setOrigin([position.coords.longitude,position.coords.latitude]); // can be address in form setOrigin("12, Elm Street, NY"
+    console.log("Latitude is :", position.coords.latitude);
+    console.log("Longitude is :", position.coords.longitude);
+  })
 }

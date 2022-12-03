@@ -28,7 +28,8 @@ class SearchForm extends React.Component {
             activities: (paramms.get('activities')=='on'),
             markets: (paramms.get('markets')=='on'),
             scenary: (paramms.get('scenary')=='on'),
-            gas: (paramms.get('gas')=='on')
+            gas: (paramms.get('gas')=='on'),
+            drinks:(paramms.get('drinks')=='on')
         }
 
     }

@@ -6,16 +6,26 @@ import "./directions.css"
 import "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css"
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from './images/logo.png'
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faBook, faCoffee, faCamera, faGasPump, faHospital, faMartiniGlassCitrus, faPeopleGroup, faStore, faTree, faUmbrellaBeach, faUtensils } from '@fortawesome/free-solid-svg-icons'
 import airtableJson from 'airtable-json';
 
 mapboxgl.accessToken = "pk.eyJ1IjoianVhbnExMjI2IiwiYSI6ImNsYjZxY2tnbzAzangzcG9keTA5OHluZGoifQ.gvrUPVXU_yyQnEDDy274ww";
 const auth_key = "keymRUApDEF4BUcI9";
 const base_name = "app9C1Og0GfjFYSpo";
-const element = <FontAwesomeIcon icon={faCoffee} />
-
+const FACoffee = <FontAwesomeIcon icon={faCoffee} />
+const FAUtensils = <FontAwesomeIcon icon={faUtensils} />
+const FAUmbrellaBeach = <FontAwesomeIcon icon={faUmbrellaBeach} />
+const FATree = <FontAwesomeIcon icon={faTree} />
+const FABook = <FontAwesomeIcon icon={faBook} />
+const FAHospital = <FontAwesomeIcon icon={faHospital} />
+const FAPeopleGroup = <FontAwesomeIcon icon={faPeopleGroup} />
+const FAStore = <FontAwesomeIcon icon={faStore} />
+const FACamera = <FontAwesomeIcon icon={faCamera} />
+const FAMartiniGlassCitrus = <FontAwesomeIcon icon={faMartiniGlassCitrus} />
+const FAGasPump = <FontAwesomeIcon icon={faGasPump} />
 var data = airtableJson({
   auth_key,
   base_name,

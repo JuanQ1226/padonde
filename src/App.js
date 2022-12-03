@@ -65,7 +65,19 @@ export default class App extends React.PureComponent {
       unit: 'metric',
       profile: 'mapbox/driving'
     })
-    
+    var button = document.body.appendChild(document.createElement('button'));
+    button.style = 'z-index:10;position:absolute;top:165px;right:100px;';
+    button.textContent = 'From my location';
+    map.on('load', () => {
+      button.addEventListener('click', function() {
+        console.log("click");
+        navigator.geolocation.getCurrentPosition(function(position) { 
+            directions.setOrigin([position.coords.longitude,position.coords.latitude]); // can be address in form setOrigin("12, Elm Street, NY"
+            console.log("Latitude is :", position.coords.latitude);
+            console.log("Longitude is :", position.coords.longitude);
+        });
+      });
+    })
     map.addControl(directions, 'top-left');
     map.addControl(new mapboxgl.NavigationControl({
       showCompass: true,

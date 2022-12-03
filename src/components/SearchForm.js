@@ -15,23 +15,28 @@ class SearchForm extends React.Component {
     constructor(props) {
         super(props);
         this.handleInputChange = this.handleInputChange.bind(this)
-        this.handleOnSubmit = this.handleOnSubmit.bind(this)
+        this.setStateTrue = this.setStateTrue.bind(this)
+        let paramms = new URLSearchParams(window.location.search); 
         this.state={
             rangeValue: 15,
-            food: false,
-            coffee: false,
-            drinks: false,
-            beach: false,
-            nature: false,
-            books: false,
-            hospitals: false,
-            activities: false,
-            markets: false,
-            scenary: false,
-            gas: false
+            food: (paramms.get('food')=='on'),
+            coffee: (paramms.get('coffee')=='on'),
+            beach: (paramms.get('beach')=='on'),
+            nature: (paramms.get('nature')=='on'),
+            books: (paramms.get('books')=='on'),
+            hospitals: (paramms.get('hospitals')=='on'),
+            activities: (paramms.get('activities')=='on'),
+            markets: (paramms.get('markets')=='on'),
+            scenary: (paramms.get('scenary')=='on'),
+            gas: (paramms.get('gas')=='on')
         }
-    }
 
+    }
+    
+
+    setStateTrue(StateName){
+        this.setState({StateName: true})
+    }
     handleInputChange = (event) => {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -42,54 +47,16 @@ class SearchForm extends React.Component {
         });
       }
 
-      handleOnSubmit(event){
-        console.log('s')
-        event.preventDefautl();
-        if (this.state.coffee && !selectedTypes.includes("coffee")) {
-            selectedTypes.push("coffee")
-        }
-        if (this.state.beach && !selectedTypes.includes("playa")) {
-            selectedTypes.push("playa")
-        }
-        if (this.state.drinks && !selectedTypes.includes("bebida")) {
-            selectedTypes.push("bebida")
-        }
-        if (this.state.food && !selectedTypes.includes("comida")) {
-            selectedTypes.push("comida")
-        }
-        if (this.state.nature && !selectedTypes.includes("bosque")) {
-            selectedTypes.push("bosque")
-        }
-        if (this.state.books && !selectedTypes.includes("bibliotecas")) {
-            selectedTypes.push("bibliotecas")
-        }
-        if (this.state.hospitals && !selectedTypes.includes("hospital")) {
-            selectedTypes.push("hospital")
-        }
-        if (this.state.activities && !selectedTypes.includes("actividades")) {
-            selectedTypes.push("actividades")
-        }
-        if (this.state.scenary && !selectedTypes.includes("fotos")) {
-            selectedTypes.push("fotos")
-        }
-        if (this.state.markets && !selectedTypes.includes("tiendas")) {
-            selectedTypes.push("tiendas")
-        }
-        if (this.state.gas && !selectedTypes.includes("gas")) {
-            selectedTypes.push("gas")
-        }
-        console.log(selectedTypes)
-    }
     render() {
         return (
             <Container>
                 <Card className="mt-2" >
-                    <Form controlId="searchForm" onSubmit={this.handleOnSubmit}>
+                    <Form controlId="searchForm">
                         <Row className='align-items-center'>
-                            <Col sm={12} lg={8}>
+                            <Col sm={12} lg={10}>
                                 <Form.Label inline>Categorias</Form.Label>
                                 <Form.Group controlId='Categories'>
-                                    <Form.Check inline checked={this.state.food} name="food" type="checkbox" id="checkUtensils" onChange={this.handleInputChange} label={<FontAwesomeIcon icon={faUtensils} size="2x" />}></Form.Check>
+                                    <Form.Check inline checked={this.state.food} name="food" type="checkbox" id="checkUtensils"  onChange={this.handleInputChange} label={<FontAwesomeIcon icon={faUtensils} size="2x" />}></Form.Check>
                                     <Form.Check inline checked={this.state.coffee} name="coffee" type="checkbox" id="checkCoffee" onChange={this.handleInputChange} label={<FontAwesomeIcon icon={faCoffee} size="2x" />}></Form.Check>
                                     <Form.Check inline checked={this.state.drinks} name="drinks" type="checkbox" id="checkDrinks" onChange={this.handleInputChange} label={<FontAwesomeIcon icon={faMartiniGlassCitrus} size="2x" />}></Form.Check>
                                     <Form.Check inline checked={this.state.beach} name="beach" type="checkbox" id="checkBeach" onChange={this.handleInputChange} label={<FontAwesomeIcon icon={faUmbrellaBeach} size="2x" />}></Form.Check>
@@ -101,11 +68,6 @@ class SearchForm extends React.Component {
                                     <Form.Check inline checked={this.state.scenary} name="scenary" type="checkbox" id="checkScenary" onChange={this.handleInputChange} label={<FontAwesomeIcon icon={faCamera} size="2x" />}></Form.Check>
                                     <Form.Check inline checked={this.state.gas} name="gas" type="checkbox" id="checkGas" onChange={this.handleInputChange} label={<FontAwesomeIcon icon={faGasPump} size="2x" />}></Form.Check>
                                 </Form.Group>
-                            </Col>
-                            <Col sm={12} lg={2}>
-                                <Form.Label inline>Distancia:&nbsp;</Form.Label>
-                                <span id="milesRadius">{this.state.rangeValue} millas</span>
-                                <Form.Range min="1" max="115" defaultValue="15" step="1" onInput={e => this.setState({rangeValue: e.target.value})}></Form.Range>
                             </Col>
                             <Col sm={12} lg={2}>
                                 <Button variant="primary" type="submit">Buscar</Button>

@@ -7,10 +7,10 @@ This project was made for the first 24h Bloomberg Hackathon at UPR
 
 
 ### Features
--GPS Routes
--GPS Tracking
--Location Database with airtable
--Location submittng to database.
+- GPS Routes
+- GPS Tracking
+- Location Database with airtable
+- Location submittng to database.
  
  
  
